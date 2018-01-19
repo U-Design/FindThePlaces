@@ -10,9 +10,10 @@ function Trie() {
     this.root = new TrieNode(null);
 }
 
-Trie.prototype.insert = function (word) {
+Trie.prototype.insert = function (word, data) {
     var node = this.root;
-    node.list.push(word); 
+    word = word && word.toLowerCase();
+    node.list.push(data); 
 
     for (var i = 0; i < word.length; i++) {
 
@@ -21,7 +22,7 @@ Trie.prototype.insert = function (word) {
             node.children[word[i]].parent = node;
         }
         node = node.children[word[i]];
-        node.list.push(word);
+        node.list.push(data);
 
         if (i == word.length - 1) {
             node.end = true;
@@ -31,6 +32,7 @@ Trie.prototype.insert = function (word) {
 
 Trie.prototype.find = function (word) {
     var node = this.root;
+    word = word && word.toLowerCase();    
     var output = [];
     if (!word || word === '*') {
         return node.list;
@@ -45,3 +47,5 @@ Trie.prototype.find = function (word) {
 
     return node.list;
 };
+
+module.exports = new Trie();
