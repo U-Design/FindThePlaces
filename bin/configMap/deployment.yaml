@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: find-the-place-prod
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: find-the-place-prod
+  template:
+    metadata:
+      labels:
+        app: find-the-place-prod
+    spec:
+      containers:
+      - name: find-the-place-prod
+        image: find_the_place:v2
+        ports:
+        - containerPort: 8080
+        env:
+          - name: STAGE
+            value: "COUNTRY"
+        volumeMounts:
+        - name: config-vol
+          mountPath: /app/config
+      volumes:
+      - name: config-vol
+        configMap:
+          name: staging          

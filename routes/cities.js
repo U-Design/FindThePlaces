@@ -40,4 +40,10 @@ router.get('/city/:city', function (req, res, next) {
     res.status(200).json(cityList);
 });
 
+
+router.get('/*', function (req, res, next) {
+    res.status(404).json({ 'message': 'No resources' });
+});
+
+
 module.exports = router;

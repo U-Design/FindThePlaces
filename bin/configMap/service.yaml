@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: find-the-place-prod
+  labels:
+    app: find-the-place-prod
+spec:
+  selector:
+    app: find-the-place-prod
+  ports:
+  - port: 8080
+    protocol: TCP
+    nodePort: 30061
+  type: LoadBalancer

@@ -4,10 +4,12 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+let PropertiesReader = require('properties-reader');
 
 let index = require('./routes/index');
-let users = require('./routes/users');
 let cities = require('./routes/cities');
+let countries = require('./routes/countries');
+let properties = PropertiesReader('./config/role.properties');
 
 let app = express();
 
@@ -23,9 +25,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const STAGE = process.env.STAGE || 'CITY';
+process.env.JSON = properties.get(STAGE);
+
+if(STAGE === 'COUNTRY'){
+  app.use('/api', countries);
+}else{
+  app.use('/api', cities);
+}
+
 app.use('/', index);
-app.use('/users', users);
-app.use('/cityApi', cities);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
