@@ -6,7 +6,7 @@ let cityModule = (function () {
         es = require('event-stream'),
         fs = require('fs');
     let cityTrie = require('./Trie');
-    let properties = PropertiesReader('./config/role.properties');
+    let properties = PropertiesReader('./configuration/role.properties');
 
     let pathtoFile = `${process.cwd()}/${properties.get(`${process.env.STAGE || 'CITY'}`)}`;
         readStrm = fs.createReadStream(pathtoFile)

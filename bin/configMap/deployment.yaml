@@ -1,31 +1,84 @@
+#Deploy Role COUNTRY
 apiVersion: extensions/v1beta1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: find-the-place-prod
+  name: find-the-place-country
   labels:
     app: nginx
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: find-the-place-prod
+      app: find-the-place-country
   template:
     metadata:
       labels:
-        app: find-the-place-prod
+        app: find-the-place-country
     spec:
       containers:
-      - name: find-the-place-prod
-        image: find_the_place:v2
+      - name: find-the-place-country
+        image: find_the_place:v1
         ports:
         - containerPort: 8080
         env:
           - name: STAGE
             value: "COUNTRY"
-        volumeMounts:
-        - name: config-vol
-          mountPath: /app/config
-      volumes:
-      - name: config-vol
-        configMap:
-          name: staging          
+---
+# SERVICE DEPLOYMENT find-the-place-country
+apiVersion: v1
+kind: Service
+metadata:
+  name: find-the-place-country
+  labels:
+    app: find-the-place-country
+spec:
+  selector:
+    app: find-the-place-country
+  ports:
+  - port: 8080
+    protocol: TCP
+    nodePort: 30061
+  type: LoadBalancer
+--- 
+#DEPLOY Role CITY                   
+apiVersion: extensions/v1beta1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: find-the-place-city
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: find-the-place-city
+  template:
+    metadata:
+      labels:
+        app: find-the-place-city
+    spec:
+      containers:
+      - name: find-the-place-city
+        image: find_the_place:v1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: STAGE
+            value: "CITY"
+---            
+# SERVICE DEPLOYMENT find-the-place-city
+apiVersion: v1
+kind: Service
+metadata:
+  name: find-the-place-city
+  labels:
+    app: find-the-place-city
+spec:
+  selector:
+    app: find-the-place-city
+  ports:
+  - port: 8080
+    protocol: TCP
+    nodePort: 30062
+  type: LoadBalancer            
+        

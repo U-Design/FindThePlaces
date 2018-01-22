@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 router.get('/health', function (req, res, next) {
-  res.status(200).json({ 'status': `${process.env.STAGE || 'DEFAULT'} UP` });
+  res.status(200).json({ 'status': `${process.env.STAGE || 'DEFAULT'} is UP` });
 });
 
 

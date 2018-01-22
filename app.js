@@ -9,7 +9,7 @@ let PropertiesReader = require('properties-reader');
 let index = require('./routes/index');
 let cities = require('./routes/cities');
 let countries = require('./routes/countries');
-let properties = PropertiesReader('./config/role.properties');
+let properties = PropertiesReader('./configuration/role.properties');
 
 let app = express();
 
@@ -25,8 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const STAGE = process.env.STAGE || 'CITY';
+const STAGE = process.env.STAGE || 'COUNTRY';
 process.env.JSON = properties.get(STAGE);
+console.log(STAGE);
 
 if(STAGE === 'COUNTRY'){
   app.use('/api', countries);
