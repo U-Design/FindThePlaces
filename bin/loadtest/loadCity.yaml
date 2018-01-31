@@ -1,5 +1,5 @@
 config:
-  target: 'https://artillery.io'
+  target: 'http://192.168.99.102:30062'
   phases:
     - duration: 60
       arrivalRate: 20
@@ -10,3 +10,4 @@ scenarios:
   - flow:
     - get:
         url: "/docs"
+#change the ip as per minikube.
