@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "deploy":"kubectl create -f bin\/configMap\/deployment.yaml",
-    "displace" : "node bin\/configMap\/displace.js"
+    "deploy": "node bin/configMap/deployManage.js deploy" ,
+    "displace": "node bin/configMap/deployManage.js displace",
+    "monitorDeploy": "node bin/configMap/monitor.js deploy" ,
+    "monitorDisplace": "node bin/configMap/monitor.js displace",
+    "weave" : "node bin/configMap/weave.js"
   },
   "dependencies": {
     "JSONStream": "^1.3.2",
@@ -14,9 +17,13 @@
     "debug": "~2.6.9",
     "event-stream": "^3.3.4",
     "express": "~4.15.5",
+    "express-actuator": "^1.1.0",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "properties-reader": "0.0.16",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "artillery": "^1.6.0-12"
   }
 }

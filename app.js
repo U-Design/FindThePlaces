@@ -10,6 +10,7 @@ let index = require('./routes/index');
 let cities = require('./routes/cities');
 let countries = require('./routes/countries');
 let properties = PropertiesReader('./configuration/role.properties');
+let actuator  =  require('express-actuator'); 
 
 let app = express();
 
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(actuator());
 
 const STAGE = process.env.STAGE || 'COUNTRY';
 process.env.JSON = properties.get(STAGE);
