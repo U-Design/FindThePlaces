@@ -1,5 +1,5 @@
 config:
-  target: 'http://192.168.99.102:30061'
+  target: 'http://192.168.99.100:30061'
   phases:
     - duration: 60
       arrivalRate: 20
@@ -9,5 +9,5 @@ config:
 scenarios:
   - flow:
     - get:
-        url: "/docs"
+        url: "/api"
 #change the ip as per minikube.

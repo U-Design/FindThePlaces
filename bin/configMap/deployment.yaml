@@ -15,11 +15,18 @@ spec:
       labels:
         app: find-the-place-country
     spec:
+      volumes:
+      - name: baxd-features-pv
+        persistentVolumeClaim:
+         claimName: baxd-features-pv-claim
       containers:
       - name: find-the-place-country
         image: find_the_place:v1
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/usr/share/data/"
+          name: baxd-features-pv
         env:
           - name: STAGE
             value: "COUNTRY"
@@ -57,11 +64,18 @@ spec:
       labels:
         app: find-the-place-city
     spec:
+      volumes:
+      - name: baxd-features-pv
+        persistentVolumeClaim:
+         claimName: baxd-features-pv-claim
       containers:
       - name: find-the-place-city
         image: find_the_place:v1
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/usr/share/data/"
+          name: baxd-features-pv
         env:
           - name: STAGE
             value: "CITY"
