@@ -3,16 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "deploy": "node bin/configMap/deployManage.js deploy" ,
-    "displace": "node bin/configMap/deployManage.js displace",
-    "monitorDeploy": "node bin/configMap/monitor.js deploy" ,
-    "monitorDisplace": "node bin/configMap/monitor.js displace",
-    "weave" : "node bin/configMap/weave.js"
+    "start": "node ./src/bin/www",
+    "deploy": "node config/Scripts/deployManage.js deploy",
+    "displace": "node config/Scripts/deployManage.js displace",
+    "monitorDeploy": "node config/Scripts/monitor.js deploy",
+    "monitorDisplace": "node config/Scripts/monitor.js displace",
+    "weave": "node config/Scripts/weave.js"
   },
   "dependencies": {
     "JSONStream": "^1.3.2",
     "body-parser": "~1.18.2",
+    "chokidar": "^2.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "event-stream": "^3.3.4",

@@ -1,1 +1,0 @@
-kubectl create -f bin/configMap/deployment.yaml

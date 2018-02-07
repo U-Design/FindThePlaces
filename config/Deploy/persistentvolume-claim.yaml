@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: baxd-features-pv-claim
+  name: features-pv-claim
 spec:
   storageClassName: manual
   accessModes:
